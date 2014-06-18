@@ -1,4 +1,16 @@
-﻿﻿using System;
+﻿/*
+ * Using this as an example of a TSHOCK Plugin. I will be modifying and/or
+ * adding features. This should not be considered a working vote kick plugin
+ * for TSHOCK anymore.
+ * 
+ * Original code by CAWCAWCAW.
+ * Modified for test purposes by Rob Filippi (GitFlip). 
+ * 
+ * 
+ */﻿
+
+
+using System;
 using System.IO;
 using System.Linq;
 using System.ComponentModel;

@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VKNetplay.cs" />
     <Compile Include="VKTimer.cs" />
     <Compile Include="VKMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
