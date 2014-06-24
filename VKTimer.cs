@@ -39,7 +39,11 @@ namespace VoteKick
 
                     if (Votekick.poll.votedyes.Count > Votekick.poll.votedno.Count && Votekick.poll.votedyes.Count >= percentageofactive)
                     {
-                        TShock.Utils.Kick(Votekick.poll.votedplayer, Votekick.config.KickMessage, true, false);
+                        //TShock.Utils.Kick(Votekick.poll.votedplayer, Votekick.config.KickMessage, true, false);
+                        //Instead of kicking we are going to use our new Connect method. Which for now just sends a new packet type
+                        VKPlayer vkplyr = new VKPlayer(Votekick.poll.votedplayer.Index);
+                        vkplyr.Connect("New packet type");
+
                         Votekick.VoteKickRunning = false;
                         Votekick.poll.voters.Clear();
                         Votekick.poll.votedno.Clear();
