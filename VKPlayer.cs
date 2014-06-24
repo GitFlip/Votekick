@@ -23,7 +23,7 @@ namespace VoteKick
 
         public void Connect(string ip)
         {
-            base.SendData((PacketTypes)76, ip);
+            base.SendData((PacketTypes)77, ip);
         }
     }
 }
