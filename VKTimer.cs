@@ -42,7 +42,12 @@ namespace VoteKick
                         //TShock.Utils.Kick(Votekick.poll.votedplayer, Votekick.config.KickMessage, true, false);
                         //Instead of kicking we are going to use our new Connect method. Which for now just sends a new packet type
                         VKPlayer vkplyr = new VKPlayer(Votekick.poll.votedplayer.Index);
-                        vkplyr.Connect("New packet type");
+                        // TODO get this IP from the config.json file
+                        // Load the IP when a player reaches coordinates X and Y
+                        // obviously THIS is not the place to do that, but leaving
+                        // the comment here
+                        vkplyr.Connect("67.186.57.60:7778");
+                        //vkplyr.Connect("Hello World");
 
                         Votekick.VoteKickRunning = false;
                         Votekick.poll.voters.Clear();
