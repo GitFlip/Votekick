@@ -58,6 +58,10 @@ namespace VoteKick
         public override void Initialize()
         {
             ReadConfig();
+
+            ServerApi.Hooks.NetGetData.Register(this, GetData, 10);
+            GetDataHandlers.InitGetDataHandler();
+
             _timers = new VoteKickTimer();
             _timers.Start();
 
@@ -69,9 +73,41 @@ namespace VoteKick
         {
             if (disposing)
             {
+                ServerApi.Hooks.NetGetData.Deregister(this, GetData);
             }
             base.Dispose(disposing);
         }
+
+        private void GetData(GetDataEventArgs e)
+        {
+            PacketTypes type = e.MsgID;
+            var player = TShock.Players[e.Msg.whoAmI];
+            if (player == null)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (!player.ConnectionAlive)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            using (var data = new MemoryStream(e.Msg.readBuffer, e.Index, e.Length))
+            {
+                try
+                {
+                    if (GetDataHandlers.HandlerGetData(type, player, data))
+                        e.Handled = true;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.ToString());
+                }
+            }
+        }
+
         public static bool VoteKickRunning = false;
         public static bool VoteMuteRunning = false;
         public static bool VoteBanRunning = false;

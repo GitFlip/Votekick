@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataHandler.cs" />
     <Compile Include="VKPlayer.cs" />
     <Compile Include="VKTimer.cs" />
     <Compile Include="VKMain.cs" />
