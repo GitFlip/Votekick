@@ -29,16 +29,17 @@ namespace VoteKick
     }
     public static class GetDataHandlers
     {
-        static string EditHouse = "house.edit";
-        static string TPHouse = "house.rod";
+        //static string EditHouse = "house.edit";
+        //static string TPHouse = "house.rod";
         private static Dictionary<PacketTypes, GetDataHandlerDelegate> GetDataHandlerDelegates;
 
         public static void InitGetDataHandler()
         {
             GetDataHandlerDelegates = new Dictionary<PacketTypes, GetDataHandlerDelegate>
             {
-                {PacketTypes.Tile, HandleTile},
-                {PacketTypes.TileSendSquare, HandleSendTileSquare},
+                {PacketTypes.PlayerUpdate, HandlePlayerUpdate},     // PacketType 13
+                {PacketTypes.Tile, HandleTile},                     // PacketType 17
+                {PacketTypes.TileSendSquare, HandleSendTileSquare}, // PacketType 20
             };
         }
 
@@ -59,6 +60,24 @@ namespace VoteKick
             return false;
         }
 
+        private static bool HandlePlayerUpdate(GetDataHandlerArgs args)
+        {
+            // int Index = (int)args.Data.ReadByte();
+            //TShock player = TShock.Players[args.Player.Index];
+            var player = TShock.Players[args.Player.Index];
+            VKPlayer vkplyr = new VKPlayer(player.Index);
+
+            //args.Player.SendMessage("Hello from HandlePlayerUpdate: " + vkplyr.X, Color.Yellow);
+
+            if ( vkplyr.X < Votekick.config.WestPosition )
+            {
+                vkplyr.Connect(Votekick.config.WestServer);
+            }
+
+            //args.Player.SendMessage("Hello from HandlePlayerUpdate: ", Color.Yellow);
+            return false;
+        }
+
         private static bool HandleSendTileSquare(GetDataHandlerArgs args)
         {
             Console.WriteLine("HandleSendTileSquare");
@@ -68,9 +87,9 @@ namespace VoteKick
             int tilex = args.Data.ReadInt16();
             int tiley = args.Data.ReadInt16();
 
-            args.Player.SendMessage("Hello from HandleSendTileSquare: " + tilex, Color.Yellow);
+            //args.Player.SendMessage("Hello from HandleSendTileSquare: " + tilex, Color.Yellow);
 
-            return true;
+            return false;
         }
         private static bool HandleTile(GetDataHandlerArgs args)
         {
@@ -85,10 +104,10 @@ namespace VoteKick
             int tilex = Math.Abs(x); //Not Used yet
             int tiley = Math.Abs(y); //Not Used yet
 
-            args.Player.SendMessage("Hello from HandleTile: " + x, Color.Yellow);
+            //args.Player.SendMessage("Hello from HandleTile: " + x, Color.Yellow);
 
-            // args.Player.SendTileSquare(x, y); We might want to send this everytime we return true....
-            return true;
+            //args.Player.SendTileSquare(x, y); //We might want to send this everytime we return true.... NO That makes the world not editable
+            return false;
         }
     }
 }

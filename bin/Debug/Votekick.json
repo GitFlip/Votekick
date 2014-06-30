@@ -1,0 +1,19 @@
+{
+  "PercentofPlayersVoteYesToKick": 50.0,
+  "PercentofPlayersVoteYesToMute": 50.0,
+  "PercentofPlayersVoteYesToBan": 50.0,
+  "AmountofPlayersForVotesToTakeEffect": 2,
+  "seconds": "Vote time below is in seconds.",
+  "VoteTime": 10.0,
+  "BanTimeInDays": 2,
+  "CanPlayersVoteKick": true,
+  "KickMessage": "You have been vote kicked from the server.",
+  "CanPlayersVoteMute": true,
+  "MuteMessage": "You have been muted by a server vote.",
+  "CanPlayersVoteBan": true,
+  "BanMessage": "Ban by vote from the server.",
+  "WestServer": "67.186.57.60:7778",
+  "WestPosition": 66720,
+  "EastServer": "67.186.57.60:7778",
+  "EastPosition": -1
+}

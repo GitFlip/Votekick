@@ -420,6 +420,10 @@ namespace VoteKick
             public string MuteMessage = "You have been muted by a server vote.";
             public bool CanPlayersVoteBan = true;
             public string BanMessage = "Ban by vote from the server.";
+            public string WestServer = "";
+            public int WestPosition = -1;
+            public string EastServer = "";
+            public int EastPosition = -1;
 
         }
 

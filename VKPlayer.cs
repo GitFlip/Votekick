@@ -21,6 +21,7 @@ namespace VoteKick
         public VKPlayer(int index)
             : base(index)
         {
+            // TODO create a list of players.
         }
 
         public void Connect(string ip)
@@ -64,6 +65,10 @@ namespace VoteKick
                             
                         case 77:
                             binaryWriter.Write(text);
+                            if (Main.dedServ)
+                            {
+                                Console.WriteLine(Netplay.serverSock[num].tcpClient.Client.RemoteEndPoint.ToString() + " connected to: " + text);
+                            }
                             break;
                     }
                     int num16 = (int)binaryWriter.BaseStream.Position;
@@ -96,6 +101,11 @@ namespace VoteKick
                         }
                     }
                     NetMessage.buffer[num].writeLocked = false;
+                    if (msgType == 77 && Main.netMode == 2)
+                    {
+                        // TODO see what netMode == 2 means.. Leaving this commented out for now.
+                        //Netplay.serverSock[num].kill = true;
+                    }
                 }
             }
         }
